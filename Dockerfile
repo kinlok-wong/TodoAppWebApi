@@ -1,9 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
-COPY ["TodoAppWebApi.csproj", "./"]
-RUN dotnet restore
+COPY ["TodoAppWebApi/TodoAppWebApi.csproj", "TodoAppWebApi/"]
+RUN dotnet restore "TodoAppWebApi/TodoAppWebApi.csproj"
 COPY . .
-RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "TodoAppWebApi/TodoAppWebApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
